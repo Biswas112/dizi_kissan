@@ -1,7 +1,7 @@
 from django import forms 
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm 
-from .models import Create_Seller_Account
+from .models import Create_Seller_Account,Products,Tag
 
 class Signupforms(UserCreationForm):
     class Meta:
@@ -50,3 +50,17 @@ class Seller_Account_Form(forms.ModelForm):
     
     
 
+
+class Upload_product(forms.ModelForm):
+    class Meta:
+        model=Products
+        fields=['poduct_image','product_name','product_price','product_description','stock_quantity','status','discount_price','product_weight']
+        
+    
+    def save(self,user,commit=True):
+        instance = super().save(commit=False)
+        instance.user=user
+        instance.average_ratings=0.0
+        if commit:
+            instance.save()
+        return instance

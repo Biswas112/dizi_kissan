@@ -2,10 +2,10 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login, logout
-from .forms import Signupforms, Seller_Account_Form
+from .forms import Signupforms, Seller_Account_Form, Upload_product
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
-from .models import Create_Seller_Account           
+from .models import Create_Seller_Account        
 
 def home(request):
     return render(request,'layout/home.html')
@@ -61,7 +61,7 @@ def seller_account(request):
     if request.method == "POST":
         form = Seller_Account_Form(request.POST, request.FILES)
         if form.is_valid():
-            seller_account = form.save(commit=False)  # Don't save yet
+            seller_account = form.save(user=request.user,commit=False)  # Don't save yet
             seller_account.user = request.user  # Set the logged-in user
             seller_account.save()  # Now save it
             messages.success(request, "Your seller account has been created successfully.")
@@ -79,6 +79,21 @@ def seller_account(request):
 
 def profile(request):
     Seller_Account=Create_Seller_Account.objects.get(user=request.user)
-    print(Seller_Account)
     data={"Seller_Account":Seller_Account}
     return render(request,'layout/profile.html',data)
+
+def products(request):
+    return render(request,'layout/products.html')
+
+def product_forms(request):
+    if request.method=='POST':
+        form=Upload_product(request.POST,request.FILES)
+        if form.is_valid():
+            product=form.save(commit=False)
+            product.user=request.user
+            product.save()
+            return redirect('ecommerce')
+    else:
+        form=Upload_product()
+        
+    return render(request,'layout/product_form.html',{'form':form})
