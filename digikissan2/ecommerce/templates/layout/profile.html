@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -259,3 +260,266 @@
 </body>
 
 </html>
+=======
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Profile</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        background-image: url('{% static 'image/sell_acc.jpg'%}');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    header {
+        background: rgba(61, 90, 254, 0.8);
+        color: white;
+        padding: 1.5rem;
+        text-align: center;
+        border-bottom: 3px solid #fff;
+    }
+
+    main {
+        max-width: 900px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        transform: scale(0.98);
+        animation: fadeIn 1s ease-out forwards;
+    }
+
+    .profile-card {
+        background: white;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+    }
+
+    .profile-header {
+        background: #3d5afe;
+        color: white;
+        text-align: center;
+        padding: 2rem;
+        border-bottom: 2px solid #fff;
+    }
+
+    .profile-header .profile-picture {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 5px solid white;
+        margin-bottom: 1rem;
+        transition: transform 0.3s ease;
+    }
+
+    .profile-header h2 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    .profile-header p {
+        font-size: 1.1rem;
+    }
+
+    .profile-content {
+        padding: 1.5rem;
+    }
+
+    .profile-content h3 {
+        margin-bottom: 0.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #ddd;
+        font-size: 1.4rem;
+        font-weight: 500;
+    }
+
+    .profile-content p {
+        margin-bottom: 0.8rem;
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
+
+    footer {
+        background: #3d5afe;
+        color: white;
+        text-align: center;
+        padding: 1.5rem 0;
+        margin-top: 2rem;
+        font-size: 1rem;
+    }
+
+    footer p {
+        margin: 0;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Hover effect for profile picture */
+    .profile-header .profile-picture:hover {
+        transform: scale(1.1);
+    }
+
+    /* Styling for Chart */
+    .chart-container {
+        width: 100%;
+        height: 400px;
+        margin: 2rem 0;
+    }
+</style>
+<body>
+    <header>
+        <h1>Seller Profile</h1>
+    </header>
+
+    <main>
+        <div class="profile-card">
+            <div class="profile-header">
+                <img src="{{Seller_Account.profile_picture.url}}" alt="Profile Picture" class="profile-picture" id="profilePic">
+                <h2>{{ Seller_Account.business_name }}</h2>
+                <p>{{ Seller_Account.business_email }}</p>
+            </div>
+            <div class="profile-content">
+                <h3>Personal Information</h3>
+                <p><strong>Business Name:</strong> {{ Seller_Account.business_name }}</p>
+                <p><strong>Business Address:</strong> {{ Seller_Account.business_address }}</p>
+                <p><strong>Contact Number:</strong> {{ Seller_Account.business_contact_number }}</p>
+
+                <h3>Verification Information</h3>
+                <p><strong>Citizenship Number:</strong> {{ Seller_Account.citizenship_number }}</p>
+                <p><strong>PAN Number:</strong> {{ Seller_Account.pan_number }}</p>
+                <p><strong>Verification Status:</strong> {{ Seller_Account.verification_status }}</p>
+
+                <h3>Bank Information</h3>
+                <p><strong>Bank Account Number:</strong> {{ Seller_Account.bank_account_number }}</p>
+                <p><strong>Bank Name:</strong> {{ Seller_Account.bank_name }}</p>
+                <p><strong>IFCS Code:</strong> {{ Seller_Account.ifcs_code }}</p>
+
+                <h3>Business Statistics</h3>
+                <p><strong>Total Sales:</strong> {{ Seller_Account.total_sales }}</p>
+                <p><strong>Rating:</strong> {{ Seller_Account.rating }}</p>
+                <p><strong>Reviews:</strong> {{ Seller_Account.reviews_count }}</p>
+
+                <!-- Graphs -->
+                <div class="chart-container">
+                    <canvas id="salesChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <canvas id="ratingChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <canvas id="reviewsChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Digi Kishan Sathi | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        // Sales chart
+        const salesChartCtx = document.getElementById('salesChart').getContext('2d');
+        const salesChart = new Chart(salesChartCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'], 
+                datasets: [{
+                    label: 'Total Sales',
+                    data: [10, 20, 30, 40, 50, 60,70,80,90,100],
+                    backgroundColor: 'rgba(61, 254, 61, 0.8)',
+                    borderColor: 'rgba(61, 90, 254, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Rating chart
+        const ratingChartCtx = document.getElementById('ratingChart').getContext('2d');
+        const ratingChart = new Chart(ratingChartCtx, {
+            type: 'line',
+            data: {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                datasets: [{
+                    label: 'Ratings',
+                    data: [4.2, 4.3, 4.4, 4.5], //ya data launu paryo
+                    backgroundColor: 'rgba(0, 204, 255, 0.3)',
+                    borderColor: 'rgba(0, 204, 255, 1)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 5
+                    }
+                }
+            }
+        });
+
+        // Reviews chart
+        const reviewsChartCtx = document.getElementById('reviewsChart').getContext('2d');
+        const reviewsChart = new Chart(reviewsChartCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Positive', 'Neutral', 'Negative'],
+                datasets: [{
+                    data: [80, 15, 5], //ya data lunu paryo
+                    backgroundColor: ['#4caf50', '#ffeb3b', '#f44336'],
+                    hoverBackgroundColor: ['#66bb6a', '#ffee58', '#e57373']
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+    </script>
+</body>
+
+</html>
+>>>>>>> 235f43ea45fb7904dfdbcdba5ee43e48947246b1

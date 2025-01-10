@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -61,3 +62,68 @@
    
 </body>
 </html>
+=======
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Disease Detection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="{% static 'css/ai.css' %}" rel="stylesheet">
+    <script src="{% static 'java/ai.js' %}" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>AI-Powered Crop Disease Detection</h1>
+        <p>Upload your crop image and let AI identify potential diseases and solutions.</p>
+    </header>
+
+    <main class="container">
+        <!-- Image Upload Section -->
+        <section class="upload-section">
+            <div class="upload-box" id="upload-box">
+                <input type="file" id="file-input" accept="image/*" hidden>
+                <label for="file-input">
+                    <div class="upload-icon">
+                        <img src=" " alt="Upload Icon">
+                    </div>
+                    <p>Drag and drop an image, or click to upload</p>
+                </label>
+            </div>
+            <button id="scan-button">Scan</button>
+        </section>
+
+        <!-- Scanning Animation -->
+        <section class="scanning-area">
+            <div class="image-preview" id="image-preview">
+                <img id="uploaded-image" alt="Uploaded Crop" hidden>
+                <div class="robot-scanner" id="robot-scanner">
+                    <img src=" " alt="Scanner Robot">
+                    <div class="laser-beam"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Display -->
+        <section class="results-section" id="results-section">
+            <div class="result-card">
+                <h2>Disease Detected: <span id="disease-name">N/A</span></h2>
+                <p>Severity: <span id="severity-level">N/A</span></p>
+                <p>Description: <span id="disease-description">N/A</span></p>
+                <p>Recommended Actions: <span id="recommended-actions">N/A</span></p>
+            </div>
+        </section>
+    </main>
+
+    
+    <footer>
+        <p>&copy; 2025 Digi Kishan Sathi. All rights reserved.</p>
+    </footer>
+
+   
+</body>
+</html>
+>>>>>>> 235f43ea45fb7904dfdbcdba5ee43e48947246b1
