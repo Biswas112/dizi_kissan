@@ -13,7 +13,8 @@ urlpatterns = [
     path("seller_account",views.seller_account,name="seller_account"),
     path("profile",views.profile,name="profile"),
     path("products",views.products,name="products"),
-    path("product_form",views.product_forms,name='product_form')
+    path("product_form",views.product_forms,name='product_form'),
+    path('product_details/<int:pk>/',views.product_details,name="product_details")
 ]
 
 if settings.DEBUG:

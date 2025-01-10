@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/product_det.css' %}" rel="stylesheet">
+    <title>Product Details</title>
+</head>
+<body>
+    <div class="container">
+        <a href="/products" class="back-link">&larr; Back to Products</a>
+
+        <div class="product-detail">
+            <div class="product-image">
+                <img src="{{ products_det.poduct_image.url }}" alt="{{ products_det.product_name }}">
+            </div>
+            <div class="product-info">
+                <h1>{{ products_det.product_name }}</h1>
+                <p class="price">${{ products_det.product_price }}</p>
+                <p class="stock-status {% if products_det.status == 'avilable' %}available{% elif products_det.status == 'out_of_stock' %}out-of-stock{% else %}discounted{% endif %}">
+                    {{ products_det.status|title }}
+                </p>
+                <p class="product-description">
+                    {{ products_det.product_description }}
+                </p>
+
+                <div class="add-to-cart">
+                    <button>Add to Cart</button>
+                </div>
+
+                <div class="tags">
+                    {% for tag in products_det.tags.all %}
+                        <span>#{{ tag.name }}</span>
+                    {% endfor %}
+                </div>
+
+                {% if products_det.discount_price %}
+                    <p class="price"><strike>${{ products_det.product_price }}</strike> Now: ${{ products_det.discount_price }}</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Seller Information Section -->
+        <div class="seller-info">
+            <h3>Seller Information</h3>
+
+            <!-- Profile Info Section -->
+            <div class="profile-info">
+                <div class="profile-picture-wrapper">
+                    <img src="{{ products_det.seller.profile_picture.url}}" alt="Profile Picture">
+                    <div>
+                        <p class="seller-name">{{ products_det.seller.business_name }}</p>
+                        <p class="seller-description">{{ products_det.seller.description }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seller Stats -->
+            <div class="seller-stats">
+                <p><strong>Average Rating:</strong> {{ products_det.average_ratings}} / 5</p>
+                <p><strong>Total Sales:</strong> {{ products_det.total_sales}} units</p>
+                <p><strong>Location:</strong> {{ products_det.seller.business_address}}</p>
+                <p><strong>Contact:</strong> {{ products_det.seller.business_contact_number}}</p>
+                <p><strong>Contact:</strong> {{ products_det.seller.business_email}}</p>
+            </div>
+
+            <!-- Seller Social Links -->
+            <div class="social-links">
+                <h4>Connect with the Seller</h4>
+                <ul>
+                    {% if products_det.seller.website %}
+                        <li><a href="{{ products_det.seller.website }}" target="_blank">🌐 Website</a></li>
+                    {% endif %}
+                    {% if products_det.seller.facebook_page %}
+                        <li><a href="{{ products_det.seller.facebook_page }}" target="_blank">🅕 Facebook</a></li>
+                    {% endif %}
+                    {% if products_det.seller.instagram_page %}
+                        <li><a href="{{ products_det.seller.instagram_page }}" target="_blank">🅘 Instagram</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+
+        
+         <!-- Comments Section -->
+         <div class="comments-section">
+            <h3>Customer Reviews</h3>
+
+            <!-- Comment Form -->
+            <div class="comment-form">
+                <h4>Leave a Review</h4>
+                <form method="POST" enctype="multipart/form-data" action=" ">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Submit Comment</button>
+                </form>
+            </div>
+
+            <!-- Existing Comments -->
+            {% for comment in Comments %}
+            <div class="comment">
+                <p class="author">{{ comment.user.username }}</p>
+                <p class="date">{{ comment.date_added|timesince }}</p>
+                <p>{{ comment.comment }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+</body>
+</html>

@@ -190,7 +190,7 @@
         <nav>
             <div class="logo">DigiKissan Sathi</div>
             <ul class="nav-links">
-                <li><a href="#">Home</a></li>
+                <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="#">Products</a></li>
                 <li><a href="#">About Us</a></li>
                 <li><a href="#">Contact</a></li>
@@ -221,25 +221,28 @@
             <div class="dropdown-container">
                 <select class="dropdown" id="category-dropdown" onchange="filterCategory()">
                     <option value="">Select a Category</option>
-                    {% for Type in categories %}
-                    <option value="{{Type.category_name}}">{{Type.category_name}}</option>
-                    {% endfor %}
+                   
+                    <option value=></option>
                 </select>
             </div>
         </div>
 
         <!-- Product Cards -->
-        <div class="products-container" id="products-container">
-            {% for product in products %}
-            <div class="product-card" data-name="{{ product.product_name }}" data-category="{{ product.product_category }}">
-                <img src="{{ product.poduct_image.url }}" alt="{{ product.product_name }}">
-                <h3>{{ product.product_name }}</h3>
-                <p>${{ product.product_price }}</p>
-                <p class="rating">⭐⭐⭐⭐☆</p> <!-- Placeholder for ratings -->
-                <button class="add-to-cart-btn" onclick="addToCart({{ product.id }})">Add to Cart</button>
-            </div>
-            {% endfor %}
-        </div>
+        <!-- Product Cards -->
+<div class="products-container" id="products-container">
+    {% for product in products %}
+    <div class="product-card" data-name="{{ product.product_name }}" data-category="{{ product.product_category }}">
+        <a href="{% url 'product_details' product.id %}">
+            <img src="{{ product.poduct_image.url }}" alt="{{ product.product_name }}">
+        </a>
+        <h3>{{ product.product_name }}</h3>
+        <p>${{ product.product_price }}</p>
+        <p class="rating">⭐⭐⭐⭐☆</p> <!-- Placeholder for ratings -->
+        <button class="add-to-cart-btn" onclick="addToCart()">Add to Cart</button>
+    </div>
+    {% endfor %}
+</div>
+
 
         <!-- No Results Message -->
         <div class="no-results" id="no-results" style="display: none;">

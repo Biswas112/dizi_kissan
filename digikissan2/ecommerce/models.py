@@ -61,6 +61,13 @@ class Create_Seller_Account(models.Model):
     date_joined = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
     
+    #websites
+    facebook_page=models.CharField(max_length=500,null=True,blank=True)
+    instagram_page=models.CharField(max_length=500,null=True,blank=True)
+
+    
+
+    
     def __str__(self):
         return self.business_name
 
@@ -75,6 +82,7 @@ class Tag(models.Model):
 class Products(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     seller=models.ForeignKey(Create_Seller_Account,on_delete=models.CASCADE)
+   
     poduct_image=models.ImageField(upload_to='products/')
     product_name=models.CharField(max_length=100)
     product_price=models.DecimalField(max_digits=10,decimal_places=2)
@@ -89,8 +97,22 @@ class Products(models.Model):
     product_weight= models.DecimalField(max_digits=6,decimal_places=2,null=True,blank=True)
     avilable_from=models.DateTimeField(null=True,blank=True)
     
+    @property
+    def categories(self):
+        print(self.seller.categories)
+        return self.seller.categories
+    
     def __str__(self):
         return self.product_name
     
+    
+class Comments(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    product=models.ForeignKey(Products,on_delete=models.CASCADE)
+    comment=models.TextField()
+    data_added=models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"{self.user} commented on {self.product}"
     
     

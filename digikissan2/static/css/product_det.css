@@ -1,0 +1,273 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f9f4; /* Light green background */
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.product-detail {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.product-image {
+    flex: 1 1 40%;
+}
+
+.product-image img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.product-info {
+    flex: 1 1 55%;
+}
+
+.product-info h1 {
+    font-size: 2rem;
+    margin: 0 0 10px;
+    color: #2d6a4f; /* Dark green */
+}
+
+.product-info p {
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+.price {
+    font-size: 1.5rem;
+    color: #40916c;
+    margin: 10px 0;
+}
+
+.stock-status {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.stock-status.available {
+    color: #2d6a4f;
+}
+
+.stock-status.out-of-stock {
+    color: #d00000;
+}
+
+.add-to-cart {
+    margin-top: 20px;
+}
+
+.add-to-cart button {
+    background-color: #2d6a4f;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-to-cart button:hover {
+    background-color: #40916c;
+}
+
+.tags {
+    margin-top: 20px;
+}
+
+.tags span {
+    display: inline-block;
+    background-color: #d8f3dc;
+    color: #2d6a4f;
+    padding: 5px 10px;
+    margin: 5px 5px 0 0;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+.back-link {
+    margin-top: 20px;
+    display: inline-block;
+    text-decoration: none;
+    color: #2d6a4f;
+    font-weight: bold;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* Seller Information Section */
+.seller-info {
+    margin-top: 20px;
+    background-color: #f0f8f4;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.profile-info {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.profile-picture-wrapper {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.profile-picture-wrapper img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    object-fit: cover;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.seller-name {
+    font-size: 1.2rem;
+    color: #2d6a4f;
+    font-weight: bold;
+}
+
+.seller-description {
+    font-size: 1rem;
+    color: #666;
+    margin-top: 5px;
+}
+
+.seller-stats p {
+    margin: 5px 0;
+    font-size: 1rem;
+    color: #2d6a4f;
+}
+
+.social-links {
+    margin-top: 20px;
+}
+
+.social-links ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.social-links li {
+    margin-bottom: 10px;
+}
+
+.social-links a {
+    text-decoration: none;
+    color: #2d6a4f;
+    font-weight: bold;
+}
+
+.social-links a:hover {
+    text-decoration: underline;
+}
+
+/* Comment Section */
+.comments-section {
+    margin-top: 40px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.comments-section h3 {
+    font-size: 1.5rem;
+    color: #2d6a4f;
+    margin-bottom: 20px;
+}
+
+/* Comment Form Styling */
+.comment-form {
+    margin-bottom: 30px;
+    background-color: #f0f8f4;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.comment-form h4 {
+    font-size: 1.5rem;
+    color: #2d6a4f;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.comment-form textarea {
+    width: 100%;
+    height: 120px;
+    padding: 15px;
+    font-size: 1rem;
+    border: 2px solid #d8f3dc;
+    border-radius: 5px;
+    background-color: #fff;
+    resize: none;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.comment-form textarea:focus {
+    outline: none;
+    border-color: #40916c;
+    box-shadow: 0 0 8px rgba(64, 145, 108, 0.4);
+}
+
+.comment-form button {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px 0;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #2d6a4f;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.comment-form button:hover {
+    background-color: #40916c;
+}
+
+.comment {
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
+
+.comment p {
+    font-size: 1rem;
+    color: #333;
+}
+
+.comment .author {
+    font-weight: bold;
+    color: #2d6a4f;
+}
+
+.comment .date {
+    font-size: 0.9rem;
+    color: #888;
+}

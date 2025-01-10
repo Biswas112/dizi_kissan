@@ -2,10 +2,10 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login, logout
-from .forms import Signupforms, Seller_Account_Form, Upload_product
+from .forms import Signupforms, Seller_Account_Form, Upload_product, Comment_form
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
-from .models import Create_Seller_Account        
+from .models import Create_Seller_Account ,Products, Comments      
 
 def home(request):
     return render(request,'layout/home.html')
@@ -83,17 +83,40 @@ def profile(request):
     return render(request,'layout/profile.html',data)
 
 def products(request):
-    return render(request,'layout/products.html')
+    products=Products.objects.all()
+    seller=Create_Seller_Account.objects.all()
+    
+    data={"products":products,"seller":seller}
+    return render(request,'layout/products.html',data)
+
 
 def product_forms(request):
     if request.method=='POST':
-        form=Upload_product(request.POST,request.FILES)
-        if form.is_valid():
-            product=form.save(commit=False)
-            product.user=request.user
-            product.save()
-            return redirect('ecommerce')
-    else:
-        form=Upload_product()
+        product=Upload_product(request.POST,request.FILES)
         
-    return render(request,'layout/product_form.html',{'form':form})
+        if product.is_valid():
+            seller=Create_Seller_Account.objects.get(user=request.user)
+            product.save(user=request.user,seller=seller)
+            return redirect('products')
+        else:
+            print(product.errors)
+    else:
+        product=Upload_product()
+        print("form not submitted or invalid !!")
+         
+    return render(request,'layout/product_form.html',{'form':product})
+
+def product_details(request,pk=None):
+    product_det=Products.objects.get(id=pk)
+    comments= Comments.objects.filter(product=product_det)
+    if request.method=='POST':
+        comment=Comment_form(request.POST)
+        if comment.is_valid():
+            comment.save(user=request.user,product=product_det)
+            return redirect('product_details',pk=pk)
+        else:
+            print(comment.errors)
+    else:
+        comment=Comment_form()
+    data={"products_det":product_det,'form':comment,'Comments':comments}
+    return render(request,'layout/product_det.html',data)
