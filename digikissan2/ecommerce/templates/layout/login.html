@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Digi Kishan Sathi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="{% static 'css/login.css' %}" rel="stylesheet">
+</head>
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-image: url("{% static 'image/ai.jpg' %}");  /* Path to your background image */
+        background-size: cover;  /* Cover the entire page */
+        background-position: center;  /* Center the image */
+        background-attachment: fixed;  /* Keep the background fixed during scrolling */
+        color: #333;
+    }
+</style>
+<body>
+    <div class="container">
+        <!-- Login Form Section -->
+        <div class="login-form">
+            <h2>Login to Your Account</h2>
+            <form method="POST" action="">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="form-group">
+                    <label for="{{field.id_for_label}}">{{field.label}}</label>
+                    {{field}}
+                    {% if field.errors %}
+                    <div style="color:red; font-size:14px;">
+                        {{field.errors|striptags}} 
+                    </div>
+                    {% endif %}
+                </div> 
+                {% endfor %}
+                <button type="submit">Sign Up</button>
+                <p>Don't have an account? <a href="{% url 'sign_up' %}">singup</a></p>
+            </form>
+            {% if messages %}
+            <div>
+                {% for message in messages %}
+                <p style="color:red;">{{message}}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- About Us Section -->
+        <div class="about-us">
+            <h2>About Us</h2>
+            <p>We are a team of passionate developers working together to empower farmers using technology. Our mission is to provide advanced solutions to farmers through AI, IoT, and e-commerce.</p>
+            
+            <div class="developers">
+                <div class="developer">
+                    <img src="{% static 'image/dev1.jpg' %}" alt="Developer 1" class="developer-img">
+                    <div class="developer-name">Biswas Pokhrel</div>
+                    <div class="developer-role">Backend Developer</div>
+                    <p class="developer-bio"></p>
+                </div>
+                
+                <div class="developer">
+                    <img src="{% static 'image/dev2.jpg' %}" alt="Developer 2" class="developer-img">
+                    <div class="developer-name">Pujan Acharya</div>
+                    <div class="developer-role">Appliction Developer</div>
+                    <p class="developer-bio"></p>
+                </div>
+        
+                <div class="developer">
+                    <img src="{% static 'image/dev3.jpg' %}" alt="Developer 3" class="developer-img">
+                    <div class="developer-name">Gaurav Chaudary</div>
+                    <div class="developer-role">Frontend Developer</div>
+                    <p class="developer-bio"> </p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

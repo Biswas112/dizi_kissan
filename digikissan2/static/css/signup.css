@@ -1,0 +1,172 @@
+/* Sign Up Form Styling */
+.signup-form {
+    background-color: rgba(0, 0, 0, 0.7);  /* Dark background to match theme */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    width: 40%;
+    color: white;
+    margin-bottom: 20px;
+    z-index: 3;  /* Keeps signup form above background */
+}
+
+.signup-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.signup-form .form-group {
+    margin-bottom: 20px;
+}
+
+.signup-form label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.signup-form input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    margin-top: 5px;
+    background-color: #fff;
+    color: #333;
+}
+
+.signup-form button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #3498db;  /* Accent color consistent with other pages */
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.signup-form button:hover {
+    background-color: #2980b9;
+}
+
+.signup-form .form-group p {
+    text-align: center;
+    font-size: 14px;
+}
+
+/* About Us Section Styling */
+.about-us {
+    background-color: rgba(0, 0, 0, 0.7);  /* Dark background with slight transparency */
+    color: white;
+    padding: 30px;
+    border-radius: 8px;
+    width: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    margin-bottom: 20px;
+    z-index: 3;  /* Keeps about section above background */
+}
+
+.about-us h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.about-us p {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: #ddd;
+}
+
+.about-us ul {
+    text-align: left;
+    list-style-type: disc;
+    margin-left: 20px;
+    font-size: 16px;
+    color: #ddd;
+}
+
+.about-us a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.about-us a:hover {
+    color: #3498db;
+}
+
+/* Developer Section */
+.developers {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.developer {
+    text-align: center;
+    width: 30%;
+    margin-bottom: 20px;
+}
+
+.developer-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 2px solid #fff;
+}
+
+.developer-name {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.developer-role {
+    font-size: 14px;
+    color: #ccc;
+}
+
+.developer-bio {
+    font-size: 14px;
+    color: #ddd;
+    margin-top: 10px;
+}
+
+/* Contact Link */
+.about-us a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.about-us a:hover {
+    color: #3498db;
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .signup-form, .about-us {
+        width: 90%;
+    }
+
+    .developers {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .developer {
+        width: 80%;
+        margin: 10px 0;
+    }
+}
